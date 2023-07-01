@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { AppService } from './app.service';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,5 @@ import { AppService } from './app.service';
 export class AppComponent {
   title = 'portfolio-FrontEnd';
 
-  constructor(private http: HttpClient, private appService: AppService) {}
+  http = inject(HttpClient);
 }
