@@ -9,6 +9,7 @@ import { EducacionComponent } from './educacion/educacion.component';
 import { SkillsComponent } from './skills/skills.component';
 import { IdiomasComponent } from './idiomas/idiomas.component';
 import { ProyectosComponent } from './proyectos/proyectos.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { ProyectosComponent } from './proyectos/proyectos.component';
     IdiomasComponent,
     ProyectosComponent,
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

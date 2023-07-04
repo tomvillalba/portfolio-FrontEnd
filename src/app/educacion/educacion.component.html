@@ -1,50 +1,75 @@
 <section class="shadow-lg p-8 px-10 my-8 md:my-0">
-  <!-- Primer Item -->
   <h2 class="text-2xl font-bold mb-4">Educación</h2>
 
-  <div class="flex items-start mb-8">
-    <img
-      src="https://i.imgur.com/dTf7d8n.png"
-      alt="Ninja Academy"
-      class="w-20 h-20 mr-8"
-    />
-    <div>
-      <h3 class="text-lg font-medium mb-2">Ninja Academy</h3>
-      <p class="text-gray-700 text-justify">
-        Graduated from the Ninja Academy in Konohagakure.
-      </p>
+  <div *ngFor="let item of educacionData" class="flex items-start mb-8">
+    <img [src]="item.foto_url" [alt]="item.nombre" class="w-20 h-20 mr-8" />
+
+    <div *ngIf="!item.editando">
+      <div>
+        <h3 class="text-lg font-medium mb-2">{{ item.titulo }}</h3>
+        <p class="text-gray-700 text-justify">{{ item.descripcion }}</p>
+      </div>
+
+      <div class="mt-4">
+        <button
+          (click)="editarItem(item)"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Editar
+        </button>
+        <button
+          (click)="eliminarItem(item.id)"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="item.editando">
+      <form (submit)="guardarCambios(item)">
+        <div>
+          <label for="titulo">Nombre:</label>
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            [(ngModel)]="item.titulo"
+            required
+          />
+        </div>
+        <div>
+          <label for="descripcion">Descripción:</label>
+          <textarea
+            id="descripcion"
+            [(ngModel)]="item.descripcion"
+            name="description"
+            required
+          ></textarea>
+        </div>
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Guardar
+          </button>
+          <button
+            (click)="cancelarEdicion(item)"
+            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-
-  <!-- Segundo Item -->
-  <div class="flex items-start mb-8">
-    <img
-      src="https://i.imgur.com/tomCjgb.png"
-      alt="Sage Training"
-      class="w-20 h-20 mr-8"
-    />
-    <div>
-      <h3 class="text-lg font-medium mb-2">Sage Training</h3>
-      <p class="text-gray-700 text-justify">
-        Trained under Jiraiya to become a Sage, learning new techniques and
-        improving his chakra control.
-      </p>
-    </div>
-  </div>
-
-  <!-- Tercer Item -->
-  <div class="flex items-start">
-    <img
-      src="https://i.imgur.com/xTw1Agg.png"
-      alt="Six Paths Power"
-      class="w-20 h-20 mr-8"
-    />
-    <div>
-      <h3 class="text-lg font-medium mb-2">Six Paths Power</h3>
-      <p class="text-gray-700 text-justify">
-        Obtained the Six Paths Power during the Fourth Great Shinobi War,
-        granting him immense power and abilities.
-      </p>
-    </div>
+  <div>
+    <button
+      (click)="agregarSeccion()"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Agregar
+    </button>
   </div>
 </section>
