@@ -29,7 +29,6 @@
     <div *ngIf="item.editando">
       <form (submit)="guardarCambios(item)">
         <div>
-          <label for="titulo">Nombre:</label>
           <input
             type="text"
             id="titulo"
@@ -39,7 +38,6 @@
           />
         </div>
         <div>
-          <label for="descripcion">Descripción:</label>
           <textarea
             id="descripcion"
             [(ngModel)]="item.descripcion"
