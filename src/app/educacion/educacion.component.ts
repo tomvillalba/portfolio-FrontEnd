@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EducacionService } from './educacion.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-educacion',
@@ -8,14 +8,15 @@ import { EducacionService } from './educacion.service';
 export class EducacionComponent implements OnInit {
   educacionData: any[] = [];
 
-  constructor(private educacionService: EducacionService) {}
+  constructor(private appService: AppService) {}
 
   ngOnInit() {
-    this.obtenerEducacion();
+    this.appService.section = 'educacion';
+    this.getData();
   }
 
-  obtenerEducacion() {
-    this.educacionService.getEducacion().subscribe((data) => {
+  getData() {
+    this.appService.getData().subscribe((data) => {
       this.educacionData = data;
     });
   }
@@ -29,25 +30,28 @@ export class EducacionComponent implements OnInit {
   }
 
   guardarCambios(item: any) {
-    this.educacionService.actualizarEducacion(item).subscribe(() => {
+    this.appService.updateData(item).subscribe(() => {
       item.editando = false;
     });
   }
 
   agregarSeccion() {
-    this.educacionService
-      .actualizarEducacion({
+    this.appService
+      .updateData({
         titulo: 'titulo ejemplo',
         descripcion: 'descripcion ejemplo',
+        foto_url:
+          'https://picsum.photos/200/200?random=' +
+          Math.floor(Math.random() * 100),
       })
       .subscribe(() => {
-        this.obtenerEducacion();
+        this.getData();
       });
   }
 
   eliminarItem(id: number) {
-    this.educacionService.eliminarEducacion(id).subscribe(() => {
-      this.obtenerEducacion();
+    this.appService.deleteData(id).subscribe(() => {
+      this.getData();
     });
   }
 }

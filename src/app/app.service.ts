@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from './interfaces/app.interface';
+import { Observable } from 'rxjs';
+import apiUrl from '../api';
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
-  private data: Product[] = [];
+  apiUrl = apiUrl;
+  section = '';
 
-  constructor(private http: HttpClient) {
-    http
-      .get<Product[]>('https://api.escuelajs.co/api/v1/products')
-      .subscribe((data) => {
-        console.log('peticion');
-        this.data = data;
-      });
+  constructor(private http: HttpClient) {}
+
+  getData(): Observable<any> {
+    const url = `${this.apiUrl}/${this.section}`;
+    return this.http.get(url);
   }
 
-  get products() {
-    return this.data;
+  updateData(data: any): Observable<any> {
+    const url = `${this.apiUrl}/${this.section}`;
+    return this.http.post(url, data);
+  }
+
+  deleteData(id: number): Observable<any> {
+    const url = `${this.apiUrl}/${this.section}/${id}`;
+    return this.http.delete(url);
   }
 }
