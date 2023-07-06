@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import apiUrl from '../../api';
 @Injectable({
   providedIn: 'root',
 })
 export class EducacionService {
-  private apiUrl = 'http://localhost:8080'; // Reemplaza con la URL de tu API
-
+  apiUrl = apiUrl;
   constructor(private http: HttpClient) {}
 
   getEducacion(): Observable<any> {

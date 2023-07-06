@@ -15,7 +15,6 @@ export class EducacionComponent implements OnInit {
   }
 
   obtenerEducacion() {
-    console.log('ejecutando obtener educacion');
     this.educacionService.getEducacion().subscribe((data) => {
       this.educacionData = data;
     });

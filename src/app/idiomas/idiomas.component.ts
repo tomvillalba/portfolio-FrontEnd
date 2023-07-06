@@ -12,8 +12,10 @@ export class IdiomasComponent {
 
   constructor(private http: HttpClient) {}
   ngOnInit() {
-    this.http.get('http://localhost:8080/idiomas').subscribe((response) => {
-      this.idiomas = response as Idioma[];
-    });
+    this.http
+      .get('https://portfolioargprograma-n7be.onrender.com/idiomas')
+      .subscribe((response) => {
+        this.idiomas = response as Idioma[];
+      });
   }
 }
