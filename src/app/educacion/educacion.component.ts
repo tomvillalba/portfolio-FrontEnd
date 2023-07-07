@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import { EditService } from '../edit.service';
 
 @Component({
   selector: 'app-educacion',
   templateUrl: './educacion.component.html',
+  providers: [AppService],
 })
 export class EducacionComponent implements OnInit {
-  educacionData: any[] = [];
+  data: any[] = [];
 
-  constructor(private appService: AppService) {}
+  constructor(
+    private appService: AppService,
+    private editService: EditService
+  ) {}
 
   ngOnInit() {
     this.appService.section = 'educacion';
@@ -17,7 +22,7 @@ export class EducacionComponent implements OnInit {
 
   getData() {
     this.appService.getData().subscribe((data) => {
-      this.educacionData = data;
+      this.data = data;
     });
   }
 
@@ -53,5 +58,8 @@ export class EducacionComponent implements OnInit {
     this.appService.deleteData(id).subscribe(() => {
       this.getData();
     });
+  }
+  editMode(): boolean {
+    return this.editService.editMode;
   }
 }

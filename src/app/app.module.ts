@@ -10,6 +10,8 @@ import { SkillsComponent } from './skills/skills.component';
 import { IdiomasComponent } from './idiomas/idiomas.component';
 import { ProyectosComponent } from './proyectos/proyectos.component';
 import { FormsModule } from '@angular/forms';
+import { HardComponent } from './skills/hard/hard.component';
+import { SoftComponent } from './skills/soft/soft.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FormsModule } from '@angular/forms';
     ExperienciaComponent,
     EducacionComponent,
     SkillsComponent,
+    HardComponent,
+    SoftComponent,
     IdiomasComponent,
     ProyectosComponent,
   ],

@@ -1,51 +1,74 @@
 <section class="shadow-lg p-8 px-10 my-8 md:my-0">
   <h2 class="text-2xl font-bold mb-4">Experiencia</h2>
 
-  <!-- Primer Item -->
-  <div class="flex items-start mb-8">
-    <img
-      src="https://i.imgur.com/l4L5bB6.png"
-      alt="Hokage"
-      class="w-20 h-20 mr-8"
-    />
-    <div>
-      <h3 class="text-lg font-medium mb-2">Hokage (7th)</h3>
-      <p class="text-gray-700 text-justify">
-        As the current Hokage of Konohagakure, Naruto leads the village with
-        determination and a strong sense of justice.
-      </p>
+  <div *ngFor="let item of data" class="flex items-start mb-8">
+    <img [src]="item.foto_url" [alt]="item.nombre" class="w-20 h-20 mr-8" />
+
+    <div *ngIf="!item.editando">
+      <div>
+        <h3 class="text-lg font-medium mb-2">{{ item.titulo }}</h3>
+        <p class="text-gray-700 text-justify">{{ item.descripcion }}</p>
+      </div>
+
+      <div class="mt-4" *ngIf="editMode()">
+        <button
+          (click)="editarItem(item)"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Editar
+        </button>
+        <button
+          (click)="eliminarItem(item.id)"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="item.editando">
+      <form (submit)="guardarCambios(item)">
+        <div>
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            [(ngModel)]="item.titulo"
+            required
+          />
+        </div>
+        <div>
+          <textarea
+            id="descripcion"
+            [(ngModel)]="item.descripcion"
+            name="description"
+            required
+          ></textarea>
+        </div>
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Guardar
+          </button>
+          <button
+            (click)="cancelarEdicion(item)"
+            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <!-- Segundo Item -->
-  <div class="flex items-start mb-8">
-    <img
-      src="https://i.imgur.com/e53clU3.png"
-      alt="Team 7 Member"
-      class="w-20 h-20 mr-8"
-    />
-    <div>
-      <h3 class="text-lg font-medium mb-2">Team 7 Member</h3>
-      <p class="text-gray-700 text-justify">
-        Naruto was a member of Team 7, along with Sasuke Uchiha and Sakura
-        Haruno, during their time as Genin.
-      </p>
-    </div>
-  </div>
-
-  <!-- Tercer Item -->
-  <div class="flex items-start">
-    <img
-      src="https://i.imgur.com/Jtt02O4.png"
-      alt="Akatsuki Battle"
-      class="w-20 h-20 mr-8"
-    />
-    <div>
-      <h3 class="text-lg font-medium mb-2">Akatsuki Battle</h3>
-      <p class="text-gray-700 text-justify">
-        Naruto played a key role in the Fourth Great Shinobi War, including the
-        final battle against the leader of the Akatsuki, Obito Uchiha.
-      </p>
-    </div>
+  <div *ngIf="editMode()">
+    <button
+      (click)="agregarSeccion()"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Agregar
+    </button>
   </div>
 </section>

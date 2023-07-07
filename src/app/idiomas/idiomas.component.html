@@ -1,12 +1,74 @@
 <section class="mt-8 p-8">
   <h3 class="text-lg font-medium mb-2">Idiomas</h3>
-  <div *ngFor="let idioma of idiomas" class="mb-4">
-    <p class="text-gray-700 mb-1">{{ idioma.titulo }}</p>
-    <div class="bg-gray-200 h-2 rounded-lg">
-      <div
-        [style.width.%]="idioma.porcentaje"
-        class="bg-green-500 h-full rounded-lg"
-      ></div>
+
+  <div *ngFor="let idioma of data" class="mb-4">
+    <div *ngIf="!idioma.editando">
+      <p class="text-gray-700 mb-1">{{ idioma.titulo }}</p>
+      <div class="bg-gray-200 h-2 rounded-lg">
+        <div
+          [style.width.%]="idioma.porcentaje"
+          class="bg-green-500 h-full rounded-lg"
+        ></div>
+      </div>
+      <div class="mt-4" *ngIf="editMode()">
+        <button
+          (click)="editarItem(idioma)"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Editar
+        </button>
+        <button
+          (click)="eliminarItem(idioma.id)"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Eliminar
+        </button>
+      </div>
     </div>
+
+    <div *ngIf="idioma.editando">
+      <form (submit)="guardarCambios(idioma)">
+        <div>
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            [(ngModel)]="idioma.titulo"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            id="porcentaje"
+            name="porcentaje"
+            [(ngModel)]="idioma.porcentaje"
+            required
+          />
+        </div>
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Guardar
+          </button>
+          <button
+            (click)="cancelarEdicion(idioma)"
+            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="editMode()">
+    <button
+      (click)="agregarSeccion()"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Agregar
+    </button>
   </div>
 </section>

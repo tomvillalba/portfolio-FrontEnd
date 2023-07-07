@@ -1,0 +1,72 @@
+<!-- Habilidades duras -->
+<h3 class="text-lg font-medium mb-2">Hard Skills</h3>
+<div *ngFor="let habilidad of skills" class="mb-4">
+  <div *ngIf="!habilidad.editando">
+    <p class="text-gray-700 mb-1">{{ habilidad.titulo }}</p>
+    <div class="bg-gray-200 h-2 rounded-lg">
+      <div
+        [style.width.%]="habilidad.porcentaje"
+        class="bg-green-500 h-full rounded-lg"
+      ></div>
+    </div>
+    <div class="mt-4" *ngIf="editMode()">
+      <button
+        (click)="editarItem(habilidad)"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Editar
+      </button>
+      <button
+        (click)="eliminarItem(habilidad.id)"
+        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="habilidad.editando">
+    <form (submit)="guardarCambios(habilidad)">
+      <div>
+        <input
+          type="text"
+          id="titulo"
+          name="titulo"
+          [(ngModel)]="habilidad.titulo"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="number"
+          id="porcentaje"
+          name="porcentaje"
+          [(ngModel)]="habilidad.porcentaje"
+          required
+        />
+      </div>
+      <div class="mt-4">
+        <button
+          type="submit"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Guardar
+        </button>
+        <button
+          (click)="cancelarEdicion(habilidad)"
+          class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="editMode()">
+  <button
+    (click)="agregarSeccion()"
+    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+  >
+    Agregar
+  </button>
+</div>

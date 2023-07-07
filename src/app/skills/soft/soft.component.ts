@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
-import { EditService } from '../edit.service';
+import { AppService } from 'src/app/app.service';
+import { EditService } from 'src/app/edit.service';
 
 @Component({
-  selector: 'app-idiomas',
-  templateUrl: './idiomas.component.html',
+  selector: 'app-soft',
+  templateUrl: './soft.component.html',
+  styles: [],
   providers: [AppService],
 })
-export class IdiomasComponent implements OnInit {
-  data: any[] = [];
+export class SoftComponent implements OnInit {
+  skills: any[] = [];
 
   constructor(
     private appService: AppService,
     private editService: EditService
   ) {}
 
+  editMode(): boolean {
+    return this.editService.editMode;
+  }
+
   ngOnInit() {
-    this.appService.section = 'idiomas';
+    this.appService.section = 'softskills';
     this.getData();
   }
 
   getData() {
     this.appService.getData().subscribe((data) => {
-      this.data = data;
+      this.skills = data;
     });
   }
 
@@ -45,7 +50,7 @@ export class IdiomasComponent implements OnInit {
   agregarSeccion() {
     this.appService
       .updateData({
-        titulo: 'idioma ejemplo',
+        titulo: 'soft skill ejemplo',
         porcentaje: 50,
       })
       .subscribe(() => {
@@ -57,9 +62,5 @@ export class IdiomasComponent implements OnInit {
     this.appService.deleteData(id).subscribe(() => {
       this.getData();
     });
-  }
-
-  editMode(): boolean {
-    return this.editService.editMode;
   }
 }

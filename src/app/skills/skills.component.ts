@@ -3,9 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class SkillsComponent {
-
-}
+export class SkillsComponent {}
