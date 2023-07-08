@@ -18,15 +18,6 @@ export class LoginService {
     return this.isModalOpen;
   }
 
-  login(user: string, password: string): void {
-    if (user === 'admin' && password === '123') {
-      this.loginMode = true;
-      this.toggleModalMode();
-      return alert('Bienvenido');
-    }
-    alert('Usuario o contraseña incorrectos');
-  }
-
   toggleModalMode(): void {
     this.isModalOpen = !this.isModalOpen;
   }
@@ -36,8 +27,18 @@ export class LoginService {
     this.toggleEdit();
   }
 
+  login(user: string, password: string): void {
+    if (user === 'admin' && password === '123') {
+      this.loginMode = true;
+      this.toggleModalMode();
+      return alert('Bienvenido');
+    }
+    alert('Usuario o contraseña incorrectos');
+  }
+
   cerarSesion(): void {
     this.loginMode = false;
+    this.editService.disableEditMode();
   }
 
   toggleEdit(): void {

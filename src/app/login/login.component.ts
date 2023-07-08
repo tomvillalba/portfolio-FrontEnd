@@ -20,6 +20,10 @@ export class LoginComponent {
     this.loginService.toggleLoginMode();
   }
 
+  closeModal(): void {
+    this.loginService.toggleModalMode();
+  }
+
   loginStatus(): boolean {
     return this.loginService.modalStatus;
   }
