@@ -9,4 +9,5 @@ export enum Alertas {
   cancelarEdicion = 'Edición cancelada.',
   editarItem = 'Editando sección.',
   porcentajeError = 'No puedes colocar porcentajes superiores al 100%.',
+  errorRender = 'Render desactiva la api por inactividad, espera dos minutos y vuelve a intentarlo. Sino contactame.',
 }

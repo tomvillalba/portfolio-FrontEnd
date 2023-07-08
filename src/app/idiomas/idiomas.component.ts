@@ -21,9 +21,6 @@ export class IdiomasComponent implements OnInit {
   ngOnInit() {
     this.appService.section = 'idiomas';
     this.getData();
-    console.log(
-      'en caso de que haya un error con la api, es un problema de render que se desactiva por inactividad. Una vez q entres, al poco tiempo se activa de nuevo'
-    );
   }
 
   getData() {
