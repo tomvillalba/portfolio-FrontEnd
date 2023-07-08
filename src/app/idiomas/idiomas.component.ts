@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { EditService } from '../edit.service';
+import { ToastService } from 'angular-toastify';
+import { Alertas } from '../utilidades';
 
 @Component({
   selector: 'app-idiomas',
@@ -12,7 +14,8 @@ export class IdiomasComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private editService: EditService
+    private editService: EditService,
+    private alerts: ToastService
   ) {}
 
   ngOnInit() {
@@ -36,7 +39,7 @@ export class IdiomasComponent implements OnInit {
 
   guardarCambios(item: any) {
     if (item.porcentaje > 100)
-      return console.log('No se puede poner porcentajes superiores al 100%');
+      return this.alerts.error(Alertas.porcentajeError);
     this.appService.updateData(item).subscribe(() => {
       item.editando = false;
     });

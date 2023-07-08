@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
 import { EditService } from '../edit.service';
+import { ToastService } from 'angular-toastify';
+import { Injectable } from '@angular/core';
+import { Alertas } from '../utilidades';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +10,7 @@ export class LoginService {
   private loginMode = false;
   private isModalOpen = false;
 
-  constructor(private editService: EditService) {}
+  constructor(private editService: EditService, private alerts: ToastService) {}
 
   get loginStatus(): boolean {
     return this.loginMode;
@@ -19,6 +21,9 @@ export class LoginService {
   }
 
   toggleModalMode(): void {
+    this.isModalOpen
+      ? (document.body.style.overflow = 'auto')
+      : (document.body.style.overflow = 'hidden');
     this.isModalOpen = !this.isModalOpen;
   }
 
@@ -31,14 +36,15 @@ export class LoginService {
     if (user === 'admin' && password === '123') {
       this.loginMode = true;
       this.toggleModalMode();
-      return alert('Bienvenido');
+      return this.alerts.success(Alertas.iniciarSesion);
     }
-    alert('Usuario o contraseña incorrectos');
+    this.alerts.error(Alertas.errorSesion);
   }
 
   cerarSesion(): void {
     this.loginMode = false;
     this.editService.disableEditMode();
+    this.alerts.success(Alertas.cerrarSesion);
   }
 
   toggleEdit(): void {
@@ -50,5 +56,9 @@ export class LoginService {
     this.isModalOpen = true;
     this.editService.disableEditMode();
     document.body.style.overflow = 'hidden';
+  }
+
+  contrasenaOlvidada(): void {
+    this.alerts.warn(Alertas.contrasenaOlvidada);
   }
 }

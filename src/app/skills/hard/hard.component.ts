@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'angular-toastify';
 import { AppService } from 'src/app/app.service';
 import { EditService } from 'src/app/edit.service';
+import { Alertas } from 'src/app/utilidades';
 
 @Component({
   selector: 'app-hard',
@@ -13,7 +15,8 @@ export class HardComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private editService: EditService
+    private editService: EditService,
+    private alerts: ToastService
   ) {}
 
   editMode(): boolean {
@@ -41,7 +44,7 @@ export class HardComponent implements OnInit {
 
   guardarCambios(item: any) {
     if (item.porcentaje > 100)
-      return console.log('No se puede poner porcentajes superiores al 100%');
+      return this.alerts.error(Alertas.porcentajeError);
     this.appService.updateData(item).subscribe(() => {
       item.editando = false;
     });

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { HardComponent } from './skills/hard/hard.component';
 import { SoftComponent } from './skills/soft/soft.component';
 import { LoginComponent } from './login/login.component';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,13 @@ import { LoginComponent } from './login/login.component';
     IdiomasComponent,
     ProyectosComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, FormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    AngularToastifyModule,
+  ],
+  providers: [ToastService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

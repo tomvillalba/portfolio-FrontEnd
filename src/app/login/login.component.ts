@@ -31,4 +31,8 @@ export class LoginComponent {
   login(user: string, password: string) {
     this.loginService.login(user, password);
   }
+
+  contrasenaOlvidada(): void {
+    this.loginService.contrasenaOlvidada();
+  }
 }
