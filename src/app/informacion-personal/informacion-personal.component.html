@@ -15,10 +15,18 @@
   <div>
     <div class="flex justify-between">
       <h1 class="text-3xl font-bold mb-2">Tomás Villalba</h1>
+      <div class="mt-4" *ngIf="loginStatus()">
+        <button
+          (click)="toggleLoginMode()"
+          class="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
+          [innerText]="editMode() ? 'Cerrar edición' : 'Editar Perfil'"
+        ></button>
+      </div>
+
       <button
-        (click)="toggleEditMode()"
+        (click)="toggleModalMode()"
         class="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
-        [innerText]="editMode() ? 'Cerrar edición' : 'Editar Perfil'"
+        [innerText]="loginStatus() ? 'Cerrar Sesión' : 'Ingresar'"
       ></button>
     </div>
     <p class="text-lg font-medium mb-8">Shinobi</p>

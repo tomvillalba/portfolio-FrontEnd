@@ -1,0 +1,74 @@
+<div
+  class="bg-gray-300 bg-opacity-75 fixed inset-0 flex items-center justify-center"
+  *ngIf="loginStatus()"
+>
+  <div
+    class="bg-white w-4/5 md:w-3/5 lg:w-1/4 rounded-lg shadow-lg p-8 relative"
+  >
+    <button
+      class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+      (click)="toggleLoginMode()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    <!-- Iniciar Sesion -->
+    <div id="iniciar-sesion absolute">
+      <h1 class="text-center text-black text-4xl font-bold mb-8">
+        Iniciar Sesión
+      </h1>
+      <form action="#" method="post">
+        <div>
+          <label for="usuario" class="text-gray-600 text-lg"
+            >Usuario <span class="text-red-500">*</span></label
+          >
+          <input
+            id="usuario"
+            #usuario
+            type="text"
+            required
+            placeholder="usario12345"
+            class="w-full h-12 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+          />
+        </div>
+
+        <div class="mt-4">
+          <label for="contrasena" class="text-gray-600 text-lg"
+            >Contraseña <span class="text-red-500">*</span></label
+          >
+          <input
+            id="contrasena"
+            #contrasena
+            type="password"
+            required
+            placeholder="**********"
+            class="w-full h-12 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+          />
+        </div>
+
+        <p class="text-right mt-2 mb-4">
+          <a href="#" class="text-blue-500">¿No sabes la contraseña?</a>
+        </p>
+
+        <input
+          type="submit"
+          value="Iniciar Sesión"
+          class="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg cursor-pointer"
+          (click)="login(usuario.value, contrasena.value)"
+        />
+      </form>
+    </div>
+  </div>
+</div>

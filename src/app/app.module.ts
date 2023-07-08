@@ -12,9 +12,11 @@ import { ProyectosComponent } from './proyectos/proyectos.component';
 import { FormsModule } from '@angular/forms';
 import { HardComponent } from './skills/hard/hard.component';
 import { SoftComponent } from './skills/soft/soft.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
+    LoginComponent,
     AppComponent,
     HeaderComponent,
     InformacionPersonalComponent,

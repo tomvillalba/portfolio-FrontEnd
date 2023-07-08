@@ -16,5 +16,9 @@ export class EditService {
 
   toggleEditMode() {
     this.editMode = !this.editMode;
+
+    this.editMode
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'auto');
   }
 }
