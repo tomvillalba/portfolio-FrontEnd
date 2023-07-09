@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { EditService } from '../edit.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-experiencia',
@@ -12,8 +13,14 @@ export class ExperienciaComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private editService: EditService
+    private editService: EditService,
+    private loginService: LoginService
   ) {}
+
+  loginStatus(): boolean {
+    return this.loginService.loginStatus;
+  }
+
   editMode(): boolean {
     return this.editService.editMode;
   }
