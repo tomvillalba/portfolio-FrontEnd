@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class EditService {
-  editMode: boolean = true;
+  editMode: boolean = false;
 
   enableEditMode() {
     this.editMode = true;
