@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { EditService } from '../edit.service';
 import { LoginService } from '../login/login.service';
+import { SubirImagenesService } from '../subir-imagenes/subir-imagenes.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-informacion-personal',
@@ -9,7 +11,9 @@ import { LoginService } from '../login/login.service';
 export class InformacionPersonalComponent {
   constructor(
     private editService: EditService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private appService: AppService,
+    private subirImagenes: SubirImagenesService
   ) {}
 
   toggleEditMode(): void {
@@ -38,5 +42,9 @@ export class InformacionPersonalComponent {
 
   modalStatus(): boolean {
     return this.loginService.modalStatus;
+  }
+
+  subirArchivo(event: any): void {
+    this.appService.subirImagen(event, 'informacionpersonal');
   }
 }

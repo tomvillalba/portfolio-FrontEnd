@@ -7,7 +7,7 @@ import { Alertas } from '../utilidades';
   providedIn: 'root',
 })
 export class LoginService {
-  private loginMode = false;
+  private loginMode = true;
   private isModalOpen = false;
 
   constructor(private editService: EditService, private alerts: ToastService) {}

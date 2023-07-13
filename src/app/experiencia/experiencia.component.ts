@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { EditService } from '../edit.service';
 import { LoginService } from '../login/login.service';
+import { SubirImagenesService } from '../subir-imagenes/subir-imagenes.service';
 
 @Component({
   selector: 'app-experiencia',
@@ -67,5 +68,12 @@ export class ExperienciaComponent implements OnInit {
     this.appService.deleteData(id).subscribe(() => {
       this.getData();
     });
+  }
+
+  subirImagen(event: any, item: any): void {
+    this.appService.subirImagen(event, item)?.subscribe(() => {});
+    setTimeout(() => {
+      this.getData();
+    }, 2000);
   }
 }

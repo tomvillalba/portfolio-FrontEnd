@@ -8,7 +8,9 @@ IMPORTANTE:
 
 la api de render se desactiva por inactividad, debido a ese problema,
 y para no arruinar la experiencia de usuario,
-decidi hacer el deploy en otra plataforma.
+decidi hacer el deploy en otra plataforma,
+esta tambien se desactiva por inactividad,
+pero tarde muchisimo menos en activarse.
 
 Aun asi, la api en render funciona correctamente,
 solo hay q esperar unos minutos a que se active.

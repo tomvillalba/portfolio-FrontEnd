@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { EditService } from '../edit.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-educacion',
@@ -12,7 +13,8 @@ export class EducacionComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private editService: EditService
+    private editService: EditService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -61,5 +63,9 @@ export class EducacionComponent implements OnInit {
   }
   editMode(): boolean {
     return this.editService.editMode;
+  }
+
+  loginStatus(): boolean {
+    return this.loginService.loginStatus;
   }
 }
