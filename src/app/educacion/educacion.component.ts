@@ -56,6 +56,13 @@ export class EducacionComponent implements OnInit {
       });
   }
 
+  subirImagen(event: any, item: any): void {
+    this.appService.subirImagen(event, item)?.subscribe(() => {});
+    setTimeout(() => {
+      this.getData();
+    }, 2000);
+  }
+
   eliminarItem(id: number) {
     this.appService.deleteData(id).subscribe(() => {
       this.getData();
