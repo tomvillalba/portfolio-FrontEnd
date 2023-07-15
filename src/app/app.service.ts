@@ -35,16 +35,32 @@ export class AppService {
     return this.http.post(url, data);
   }
 
-  deleteData(id: number): Observable<any> {
+  deleteData(id: number): any {
     const url = `${this.apiUrl}/${this.section}/${id}`;
     return this.http.delete(url);
   }
 
   subirImagen(event: any, data: any): Observable<any> | any {
     if (event.target.files.length === 0) return;
-    this.subirImagenes.subirArchivo(event).then((foto_url) => {
-      const url = `${this.apiUrl}/${this.section}`;
-      this.http.post(url, { ...data, foto_url }).subscribe(() => {});
-    });
+    if (!event.target.files[0].type.match('image.*'))
+      return this.alerts.error('Solo puedes subir imagenes');
+    if (event.target.name === 'banner_url') {
+      this.subirImagenes.subirArchivo(event).then((banner_url) => {
+        console.log(this.section);
+        const url = `${this.apiUrl}/${this.section}`;
+        this.http.post(url, { ...data, banner_url }).subscribe(() => {});
+        setTimeout(() => {
+          this.alerts.success('Imagen subida correctamente');
+        }, 2000);
+      });
+    } else {
+      this.subirImagenes.subirArchivo(event).then((foto_url) => {
+        const url = `${this.apiUrl}/${this.section}`;
+        this.http.post(url, { ...data, foto_url }).subscribe(() => {});
+        setTimeout(() => {
+          this.alerts.success('Imagen subida correctamente');
+        }, 2000);
+      });
+    }
   }
 }

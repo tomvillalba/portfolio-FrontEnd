@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { EditService } from '../edit.service';
 import { LoginService } from '../login/login.service';
+import { ToastService } from 'angular-toastify';
+import { Alertas } from '../utilidades';
 
 @Component({
   selector: 'app-experiencia',
@@ -14,7 +16,8 @@ export class ExperienciaComponent implements OnInit {
   constructor(
     private appService: AppService,
     private editService: EditService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private alerts: ToastService
   ) {}
 
   loginStatus(): boolean {
@@ -45,6 +48,7 @@ export class ExperienciaComponent implements OnInit {
 
   guardarCambios(item: any) {
     this.appService.updateData(item).subscribe(() => {
+      this.alerts.success(Alertas.guardarCambios);
       item.editando = false;
     });
   }
@@ -59,12 +63,14 @@ export class ExperienciaComponent implements OnInit {
           Math.floor(Math.random() * 100),
       })
       .subscribe(() => {
+        this.alerts.success(Alertas.itemAgregar);
         this.getData();
       });
   }
 
   eliminarItem(id: number) {
     this.appService.deleteData(id).subscribe(() => {
+      this.alerts.success(Alertas.itemEliminar);
       this.getData();
     });
   }

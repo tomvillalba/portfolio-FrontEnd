@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { EditService } from '../edit.service';
 import { LoginService } from '../login/login.service';
+import { Alertas } from '../utilidades';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-educacion',
@@ -14,7 +16,8 @@ export class EducacionComponent implements OnInit {
   constructor(
     private appService: AppService,
     private editService: EditService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private alerts: ToastService
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class EducacionComponent implements OnInit {
 
   guardarCambios(item: any) {
     this.appService.updateData(item).subscribe(() => {
+      this.alerts.success(Alertas.guardarCambios);
       item.editando = false;
     });
   }
@@ -52,8 +56,16 @@ export class EducacionComponent implements OnInit {
           Math.floor(Math.random() * 100),
       })
       .subscribe(() => {
+        this.alerts.success(Alertas.itemAgregar);
         this.getData();
       });
+  }
+
+  eliminarItem(id: number) {
+    this.appService.deleteData(id).subscribe(() => {
+      this.alerts.success(Alertas.itemEliminar);
+      this.getData();
+    });
   }
 
   subirImagen(event: any, item: any): void {
@@ -61,12 +73,6 @@ export class EducacionComponent implements OnInit {
     setTimeout(() => {
       this.getData();
     }, 2000);
-  }
-
-  eliminarItem(id: number) {
-    this.appService.deleteData(id).subscribe(() => {
-      this.getData();
-    });
   }
   editMode(): boolean {
     return this.editService.editMode;

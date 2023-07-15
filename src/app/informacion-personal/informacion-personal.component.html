@@ -1,22 +1,59 @@
 <img
-  src="../assets/images/naruto-banner.jpg"
-  alt="banner"
+  [src]="data[0]?.banner_url"
+  [alt]="data[0]?.nombre"
   class="w-full h-64 rounded-md pt-5 aspect-radio-16/9 object-cover"
+  (click)="loginStatus() && editMode() && fileInput.click()"
 />
-
+<input
+  #fileInput
+  type="file"
+  accept="image/png, image/jpeg"
+  name="banner_url"
+  (change)="subirImagen($event, data[0])"
+  hidden
+/>
 <!-- Sección de Información Personal -->
 <section class="shadow-lg p-8 items-center">
-  <div class="ms-4 me-20">
+  <div class="ms-4 me-20 w-full">
+    <div class="relative flex justify-end w-full" *ngIf="!data[0]?.editando">
+      <button class="w-7 cursor-pointer me-4 md:me-7" *ngIf="editMode()">
+        <svg
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          data-testid="EditIcon"
+          (click)="editarItem(data[0])"
+        >
+          <path
+            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+          ></path>
+        </svg>
+      </button>
+    </div>
     <img
-      [src]="'./../assets/images/naruto.jpg'"
-      alt="Naruto"
-      class="rounded-[50%] w-[152px] h-[152px] mb-8 mt-[-112px] z-10"
+      [src]="data[0]?.foto_url"
+      [alt]="data[0]?.nombre"
+      class="rounded-[50%] w-[152px] h-[152px] mb-8 mt-[-112px] z-10 object-cover"
+      (click)="loginStatus() && editMode() && fileInputFoto.click()"
     />
-    <!-- <input type="file" (change)="subirArchivo($event)" /> -->
+    <input
+      #fileInputFoto
+      type="file"
+      name="foto_url"
+      accept="image/png, image/jpeg"
+      (change)="subirImagen($event, data[0])"
+      hidden
+    />
   </div>
-  <div>
+  <div *ngIf="!data[0]?.editando">
     <div class="flex justify-between">
-      <h1 class="text-3xl font-bold mb-2">Tomás Villalba</h1>
+      <h1
+        class="text-3xl font-bold mb-2"
+        (click)="loginStatus() && editMode() && editarItem(data[0])"
+      >
+        {{ data[0]?.nombre }}
+      </h1>
       <div class="mt-4" *ngIf="loginStatus()">
         <button
           (click)="toggleEditMode()"
@@ -31,10 +68,86 @@
         [innerText]="loginStatus() ? 'Cerrar Sesión' : 'Ingresar'"
       ></button>
     </div>
-    <p class="text-lg font-medium mb-8">Shinobi</p>
+    <p
+      class="text-lg font-medium mb-8"
+      (click)="loginStatus() && editMode() && editarItem(data[0])"
+    >
+      {{ data[0]?.titulo }}
+    </p>
   </div>
-  <p class="text-gray-700 text-justify">
-    A highly energetic and determined ninja from Konohagakure. He dreams of
-    becoming the Hokage and has been on a long journey to achieve that goal.
+  <p
+    *ngIf="!data[0]?.editando"
+    class="text-gray-700 text-justify"
+    (click)="loginStatus() && editMode() && editarItem(data[0])"
+  >
+    {{ data[0]?.descripcion }}
   </p>
+
+  <div
+    *ngIf="data[0]?.editando && loginStatus"
+    class="flex w-full justify-between"
+  >
+    <form (submit)="guardarCambios(data[0])" class="w-full">
+      <div>
+        <input
+          placeholder="Nombre"
+          type="text"
+          id="nombre"
+          name="nombre"
+          class="text-3xl font-bold mb-2 w-full"
+          [(ngModel)]="data[0].nombre"
+          required
+        />
+      </div>
+      <div>
+        <input
+          placeholder="Titulo"
+          type="text"
+          id="titulo"
+          name="titulo"
+          class="text-lg font-medium mb-8 w-full"
+          [(ngModel)]="data[0].titulo"
+          required
+        />
+      </div>
+      <div>
+        <textarea
+          placeholder="Descripcion"
+          id="descripcion"
+          class="text-gray-700 w-full"
+          [(ngModel)]="data[0].descripcion"
+          name="description"
+          required
+        ></textarea>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="w-7 cursor-pointer">
+          <svg
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-10cscxr"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            data-testid="SaveIcon"
+          >
+            <path
+              d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+            ></path>
+          </svg>
+        </button>
+        <button (click)="cancelarEdicion(data[0])" class="w-7 cursor-pointer">
+          <svg
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-10cscxr"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            data-testid="CloseIcon"
+          >
+            <path
+              d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
 </section>

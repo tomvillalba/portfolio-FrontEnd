@@ -41,6 +41,7 @@ export class IdiomasComponent implements OnInit {
     if (item.porcentaje > 100)
       return this.alerts.error(Alertas.porcentajeError);
     this.appService.updateData(item).subscribe(() => {
+      this.alerts.success(Alertas.guardarCambios);
       item.editando = false;
     });
   }
@@ -52,12 +53,14 @@ export class IdiomasComponent implements OnInit {
         porcentaje: 50,
       })
       .subscribe(() => {
+        this.alerts.success(Alertas.itemAgregar);
         this.getData();
       });
   }
 
   eliminarItem(id: number) {
     this.appService.deleteData(id).subscribe(() => {
+      this.alerts.success(Alertas.itemEliminar);
       this.getData();
     });
   }

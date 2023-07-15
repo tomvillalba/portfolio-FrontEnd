@@ -1,21 +1,37 @@
-<section class="shadow-lg p-8 px-10 my-8 md:my-0">
+<section class="shadow-lg p-8 md:px-10 my-8 md:my-0">
   <h2 class="text-2xl font-bold mb-4">Experiencia</h2>
 
   <div *ngFor="let item of data" class="flex items-start mb-8">
     <img
       [src]="item.foto_url"
       [alt]="item.nombre"
-      class="w-20 h-20 mr-8"
+      class="w-20 h-20 mr-8 object-cover"
       (click)="loginStatus() && editMode() && fileInput.click()"
     />
-    <input #fileInput type="file" (change)="subirImagen($event, item)" hidden />
+    <input
+      #fileInput
+      type="file"
+      accept="image/png, image/jpeg"
+      (change)="subirImagen($event, item)"
+      hidden
+    />
     <div *ngIf="!item.editando" class="flex w-full justify-between">
       <div>
-        <h3 class="text-lg font-medium mb-2">{{ item.titulo }}</h3>
-        <p class="text-gray-700 text-justify">{{ item.descripcion }}</p>
+        <h3
+          class="text-lg font-medium mb-2"
+          (click)="loginStatus() && editMode() && editarItem(item)"
+        >
+          {{ item.titulo }}
+        </h3>
+        <p
+          class="text-gray-700 text-justify"
+          (click)="loginStatus() && editMode() && editarItem(item)"
+        >
+          {{ item.descripcion }}
+        </p>
       </div>
 
-      <div class="mt-4" *ngIf="editMode()">
+      <div class="w-min md:w-auto md:mt-4" *ngIf="editMode()">
         <button class="w-7 cursor-pointer">
           <svg
             class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiBox-root css-1om0hkc"
