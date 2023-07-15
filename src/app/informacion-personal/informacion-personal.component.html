@@ -1,7 +1,7 @@
 <img
   [src]="data[0]?.banner_url"
   [alt]="data[0]?.nombre"
-  class="w-full h-64 rounded-md pt-5 aspect-radio-16/9 object-cover"
+  class="w-full h-64 rounded-md md:pt-5 aspect-radio-16/9 object-cover"
   (click)="loginStatus() && editMode() && fileInput.click()"
 />
 <input
@@ -54,17 +54,17 @@
       >
         {{ data[0]?.nombre }}
       </h1>
-      <div class="mt-4" *ngIf="loginStatus()">
+      <div class="" *ngIf="loginStatus()">
         <button
           (click)="toggleEditMode()"
-          class="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
+          class="bg-sky-700 hover:bg-sky-900 text-white font-bold h-fit p-2 md:p-3 rounded"
           [innerText]="editMode() ? 'Cerrar edición' : 'Editar Perfil'"
         ></button>
       </div>
 
       <button
         (click)="loginStatus() ? cerrarSesion() : toggleModalMode()"
-        class="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
+        class="bg-sky-700 hover:bg-sky-900 text-white font-bold h-fit p-2 md:p-3 rounded"
         [innerText]="loginStatus() ? 'Cerrar Sesión' : 'Ingresar'"
       ></button>
     </div>
