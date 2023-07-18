@@ -14,9 +14,10 @@ import { HardComponent } from './skills/hard/hard.component';
 import { SoftComponent } from './skills/soft/soft.component';
 import { LoginComponent } from './login/login.component';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { LoaderComponent } from './loader/loader.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -30,6 +31,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     SoftComponent,
     IdiomasComponent,
     ProyectosComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

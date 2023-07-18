@@ -4,6 +4,7 @@ import { LoginService } from '../login/login.service';
 import { AppService } from '../app.service';
 import { ToastService } from 'angular-toastify';
 import { Alertas } from '../utilidades';
+import { LoaderService } from '../loader/loader.service';
 
 @Component({
   selector: 'app-informacion-personal',
@@ -17,8 +18,11 @@ export class InformacionPersonalComponent implements OnInit {
     private editService: EditService,
     private loginService: LoginService,
     private appService: AppService,
-    private alerts: ToastService
-  ) {}
+    private alerts: ToastService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     this.appService.section = 'informacionpersonal';
@@ -28,6 +32,8 @@ export class InformacionPersonalComponent implements OnInit {
   getData() {
     this.appService.getData().subscribe((data) => {
       this.data = data;
+      this.loading.setLoading(false);
+      document.body.style.overflow = 'auto';
     });
   }
 

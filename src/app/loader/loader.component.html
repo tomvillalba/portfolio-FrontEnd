@@ -1,0 +1,13 @@
+<div
+  class="loader-container fixed inset-0 bg-white flex flex-col"
+  *ngIf="isLoading"
+>
+  <div class="spinner"></div>
+  <div class="text-gray-500 mt-4" *ngIf="alert && !alertApi">
+    Recuperando datos, por favor espere...
+  </div>
+  <div class="text-gray-500 mt-4 text-center" *ngIf="alertApi">
+    Está tardando más de lo normal,
+    <p>espera unos segundos más, o reintantelo más tarde!</p>
+  </div>
+</div>
