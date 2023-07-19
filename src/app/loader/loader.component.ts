@@ -9,6 +9,7 @@ import { LoaderService } from './loader.service';
 export class LoaderComponent implements OnInit {
   isLoading: boolean = true;
   alert = true;
+  alert2 = false;
   alertApi = false;
   constructor(private loaderService: LoaderService) {
     document.body.style.overflow = 'hidden';
@@ -20,6 +21,11 @@ export class LoaderComponent implements OnInit {
     });
 
     setTimeout(() => {
+      this.alert = false;
+      this.alert2 = true;
+    }, 10000);
+    setTimeout(() => {
+      this.alert2 = false;
       this.alertApi = true;
     }, 20000);
   }

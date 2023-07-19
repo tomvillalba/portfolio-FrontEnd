@@ -25,7 +25,7 @@ export class AppService {
     return this.http.get(url).pipe(
       catchError<any, any>(() => {
         console.log(Alertas.errorRender);
-        return this.alerts.error('problema con render, revisa la consola');
+        return this.alerts.error('problema con la api, revisa la consola');
       })
     );
   }
