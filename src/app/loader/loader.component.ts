@@ -27,6 +27,6 @@ export class LoaderComponent implements OnInit {
     setTimeout(() => {
       this.alert2 = false;
       this.alertApi = true;
-    }, 20000);
+    }, 22000);
   }
 }

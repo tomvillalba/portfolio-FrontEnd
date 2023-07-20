@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.proyectos-descripcion {
+  overflow: hidden;
+  max-height: 8ch;
+  transition: all 0.5s ease-in-out;
+}
+.proyectos-descripcion:hover {
+  max-height: 20ch;
+}
+.proyectos-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}

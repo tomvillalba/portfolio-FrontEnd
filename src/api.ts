@@ -9,22 +9,20 @@ IMPORTANTE:
 la api de render se desactiva por inactividad, debido a ese problema,
 y para no arruinar la experiencia de usuario,
 decidi hacer el deploy en otra plataforma,
-esta tambien se desactiva por inactividad,
-pero tarde muchisimo menos en activarse.
+esta tambien se desactiva,
+pero tarda alrededor de 15s en acivarse.
 
 Aun asi, la api en render funciona correctamente,
 solo hay q esperar unos minutos a que se active.
 
 Para probarlo,
-es tan facil como cambiar el export default de abajo
-por la otra variable de arriba.
-
-EJEMPLO:
-
-export default apiRender;
+es tan facil como descomentar el export default de abajo,
+y comentar el otro.
 
 */
 
 const apiFlyio = 'https://porfolio-argprograma.fly.dev';
 
 export default apiFlyio;
+
+// export default apiRender;

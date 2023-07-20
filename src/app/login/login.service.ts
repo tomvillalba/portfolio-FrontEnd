@@ -33,7 +33,10 @@ export class LoginService {
   }
 
   login(user: string, password: string): void {
-    if (user === 'admin' && password === '123') {
+    if (
+      user === 'argentinaprograma' &&
+      password === 'portfolioargentinaprograma2023'
+    ) {
       this.loginMode = true;
       this.toggleModalMode();
       return this.alerts.success(Alertas.iniciarSesion);
