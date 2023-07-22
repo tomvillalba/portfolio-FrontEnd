@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'portfolio-FrontEnd';
   alerts = inject(ToastService);
   http = inject(HttpClient);
+
   constructor(private loading: LoaderService) {
     this.loading.setLoading(true);
   }
